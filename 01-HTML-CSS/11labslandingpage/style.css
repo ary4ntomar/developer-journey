@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    font-family: "Montserrat";
+    font-size: 10px;
+    margin: 20px;
+}
+
+#heading{
+    display: flex;
+   justify-content: center;
+   font-family:Arial;
+   font-size: smaller;
+      margin-top: 100px;
+    margin-bottom: 20px;
+
+}
+
+#google,#mail,#pass{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 50px 5px 5px;
+    border-radius: 5px;
+    border: 1px  solid black;
+    margin-bottom: 20px;
+    font-size: x-small;
+    font-family:Arial;
+    border-style: none;
+}
+#google img{
+    display: flex;
+    padding:1px 3px 2px 1px;
+    margin-right: 40px;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+
+}
+
+.form{
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+.label , .label1{
+    display: flex;
+    justify-content:center;
+    padding-right: 140px;
+    font-family:Arial;
+    font-size: 10px;
+}
+.label1{
+    padding-right: 155px;
+}
+
+#mail , #pass{
+    background-color:whitesmoke;
+    padding:6px 60px 6px 5px;
+}
+
+#loginbtn {
+    display: flex;
+    justify-content: center;
+}
+
+#btn{
+     padding: 2px 76px 5px 76px;
+     color: white;
+     background-color: rgba(0, 0, 0, 0.801);
+     border-radius: 5px;
+    margin-top: 5px;
+    border-style: none;
+    font-family: Arial;
+}
+
+#loginlbl{
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+    font-size: 9px;
+}
+
+footer{
+font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.884);
+    color: white;
+    bottom: 0;
+    width: 100%;
+    font-size: 10px;
+    font-weight:100;
+}
+
+body{
+background-color: #CDDCDC;
+ background-image: radial-gradient(at 50% 100%, rgba(255,255,255,0.50) 0%, rgba(0,0,0,0.50) 100%), linear-gradient(to bottom, rgba(255,255,255,0.25) 0%, rgba(0,0,0,0.25) 100%);
+ background-blend-mode: screen, overlay;
+}
+html ,body{
+    height: 100%;
+}

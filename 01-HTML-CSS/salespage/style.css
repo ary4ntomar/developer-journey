@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400..700;1,400..700&display=swap');
+*{
+ margin:0;
+ padding:0;
+ box-sizing:border-box;
+}
+html,body{
+ height: 100%;
+ width: 100%;
+}
+
+.container{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    color: white;
+}
+
+.left{
+    width: 50vw;
+    background-color: rgba(6, 6, 6, 0.913);
+    position: relative;
+    overflow: hidden;
+}
+.right{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+     width: 50vw;
+    background-color: rgb(252, 253, 254);
+}
+
+header , .content{
+    margin: 5%;
+    opacity: 80%;
+     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+     font-weight: 300;
+     font-size: smaller;
+}
+
+.content>h1{
+      font-family: "Libre Baskerville", serif;
+      font-weight: 400;
+      font-size:xx-large;
+      margin-bottom: 1rem;
+}
+
+.content>p>img{
+    filter: invert(1);
+    margin:7px;
+    height: 17px;
+}
+
+.content>p{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content_>span{
+   opacity: 50%; 
+      font-size: small;
+    word-spacing: 0.2rem;
+}
+
+.brands{
+    filter: invert();
+    display: flex;
+    justify-content:space-between;
+    opacity: 70%;
+    height: 3rem;
+}
+
+.content_{
+       margin-top: 6rem;
+}
+
+.rating>img{
+      filter:invert(1);   
+      height: 1rem;
+}
+.rating{
+    display: flex;
+    justify-content: flex-start;
+    gap: 1px;
+    margin: 0px;
+}
+
+footer>img{
+    position: absolute;
+    overflow: hidden;
+      bottom: 0;
+      left: 0;
+}
+
+
+
+.form-heading{
+    color: #000;
+    font-family: "Libre Baskerville";
+    font-size: x-large;
+}
+
+.form-info{
+         font-family: "Libre Baskerville";
+         opacity: 50%;
+         color: #000;
+         margin-top: 0.2rem;
+} 
+
+.form{
+    color: #000;
+     font-family: "Libre Baskerville";
+     font-size: 11px;
+     margin-bottom: 5rem;
+
+}
+
+.companyweb ,.form-mail{
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+#company-website ,#company-mail{
+      background-color:rgb(245, 244, 244);
+      border-style: none;
+      padding: 0.5rem 9rem ;
+      border-radius: 2rem;
+      margin-top: 0.2rem;
+      margin-bottom: 0.5rem;
+
+}
+
+.form-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.nextbtn{
+    padding: 0.3em 2rem;
+    color: white;
+    background-color: #000;
+    border-style: none;
+    border-radius: 1rem;
+    margin-right: 25em;
+}
+
+.form-button>h4{
+    margin-right: 1rem;}
+
+
+
+
+
+
