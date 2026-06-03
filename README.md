@@ -1,4 +1,4 @@
-# developer-journey
+# Developer-journey
 
 A personal archive of my learning journey in technology.
 
