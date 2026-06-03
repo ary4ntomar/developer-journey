@@ -1,0 +1,124 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+     background: linear-gradient(45deg, #374a94, #000000e7, #0bd4e3d7);
+     min-height: 100vh;
+
+
+     .heading{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        font-size: 90px;
+        margin: 90px 50px  50px 50px;
+        color: #6588a5;
+        text-shadow:8px 3px 12px #000000;
+       box-shadow: 4px 4px 40px #0e0808;
+       font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+     }
+
+     .mainbody{
+        box-shadow: 4px 4px 40px #0e0808;
+        margin: 0px 50px 0px 50px;
+        padding-bottom: 10vh;
+        padding-top: 10vh;
+     }
+     
+}
+.container{
+    width: 90%;
+    max-width: 470px;
+    /* border: 1px solid black; */
+    color: aliceblue;
+    background: linear-gradient(45deg, #374a94, #000000e7, #0bd4e3d7);
+    margin: 100px auto 0;
+    border-radius: 20px;
+    padding: 40px 35px;
+    text-align: center;
+    box-shadow: 4px 1px 20px #000000;
+}
+
+.search{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search input{
+    border: 0;
+    outline: 0;
+    background-color: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+}
+
+.search button {
+     border: 0;
+    outline: 0;
+    background-color: #ebfffc;  
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer; 
+}
+
+.search button img{
+    width: 16px;
+}
+
+.weatherIcon{
+    width:170px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.icons img{
+    width: 50px;
+    margin-right: 10px;
+ filter: invert();
+}
+
+.humidity{
+    filter: brightness(20);
+}
+
+.temp{
+    font-size: 60px;
+    font-weight: 500;
+}
+
+.city{
+    font-size: 50px;
+    font-weight: 400;
+    margin-top: 5px;
+    margin-bottom: 50px;
+}
+
+.objects{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 30px 20px;
+}
+
+.icons p {
+      font-size: 20px;
+      font-weight: 200;
+}
+
+.icons{
+    display: flex;
+    align-items: center;
+    text-align: left;
+}

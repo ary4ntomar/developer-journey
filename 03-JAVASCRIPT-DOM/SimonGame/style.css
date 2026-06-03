@@ -1,0 +1,40 @@
+.btn{
+    height: 100px;
+    width: 100px;
+    border: 5px solid black;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+#container{
+    height: 300px;
+    width:300px;
+    border: 5px solid ;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+}
+
+body{
+   display: grid;
+   place-items: center;
+   margin: 0;
+   
+}
+
+.cell1{background-color: tomato;
+}
+.cell2{
+    background-color: cadetblue;
+}
+.cell3{
+    background-color: darkkhaki;
+}
+.cell4{
+    background-color: lightcoral;
+}
+.flash{
+    background-color: white;
+}

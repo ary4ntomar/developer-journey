@@ -1,0 +1,72 @@
+*{
+    margin: 0;
+    padding: 0;
+
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+    color: azure;
+    background-color: black;
+    padding: 10px;
+}
+
+ #game{
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 30px;
+} 
+
+#score{
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-top: 50px;
+    font-weight: 500;
+    font-size: xx-large;
+}
+
+#info{
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    font-size: medium;
+    font-weight: 500;
+}
+
+#btn{
+   display: flex;
+   justify-content: center;
+   margin-top: 50px;
+}
+
+#start{
+    color: aliceblue;
+    background-color: black;
+    text-decoration: none;
+    font-size: larger;
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+#rock:hover{
+    box-shadow: 2px 2px 20px rgb(0, 0, 0);
+    border-radius: 50%;
+    padding: 10px;
+    background-color: rgb(7, 7, 7);
+}
+#paper:hover{
+    box-shadow: 2px 2px 20px rgb(0, 0, 0);
+    border-radius: 50%;
+    padding: 10px;
+    background-color: rgb(4, 4, 4);
+}
+#scissor:hover{
+        box-shadow: 2px 2px 20px rgb(0, 0, 0);
+    border-radius: 50%;
+    padding: 15px;
+    background-color: rgb(4, 4, 4);
+}

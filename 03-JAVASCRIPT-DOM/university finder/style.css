@@ -1,0 +1,25 @@
+body{
+    /* background-color:#E8F8F5  ; */
+    background: linear-gradient(135deg, #598ae6, #ebf8e1, #3f87a6);
+    min-height: 100vh;
+  margin: 0;
+}
+
+h1 ,button {
+    color:#002C54;
+}
+
+button,input{
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 5px;
+}
+
+li{
+    color: #010c29  ;
+
+}
+
+hr{
+    border: 1px dotted black;
+}
