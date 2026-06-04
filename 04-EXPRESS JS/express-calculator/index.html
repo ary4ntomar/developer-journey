@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <title> WELCOME TO CALCULATOR</title>
+
+        <input type="text" id="a" placeholder="first number"/>
+        <input type="text" id="b" placeholder="second number"/>
+      <br>
+      <h2 id="result"></h2>
+      <br>
+     <div class="btns">
+         <button onclick="add()">Add</button>
+         <button onclick="sub()">Sub</button>
+         <button onclick="div()">Div</button>
+         <button onclick="mul()">Mul</button>
+     </div>   
+
+</body>
+
+<script>
+       
+      function getValue (){
+        const a = document.getElementById("a").value;
+        const b = document.getElementById("b").value;
+
+        return {a , b};
+      }   
+
+        async function add() {
+                   
+            const{a,b} = getValue();
+
+            const res = await fetch ("http://localhost:3000/sum/",{
+                method : "POST",
+                headers : {
+                    "content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    a:a,
+                    b:b
+                })
+            });
+            const data = await res.json();
+            document.getElementById("result").innerHTML = data.ans ;
+        }
+
+        async function sub(){
+            const{a ,b}= getValue();
+            const res = await fetch(`http://localhost:3000/sub/${a}/${b}`);
+            const data = await res.json();
+            document.getElementById("result").innerHTML = data.ans ;
+        }
+
+        async function div(){
+            const { a, b} = getValue();
+            const res =  await fetch(`http://localhost:3000/div/${a}/${b}`);
+            const data = await res.json();
+            document.getElementById("result").innerHTML = data.ans;
+        }
+
+        async function mul() {
+            const { a, b} = getValue();
+            const res= await fetch (`http://localhost:3000/mul/${a}/${b}`);
+            const data = await res.json();
+            document.getElementById("result").innerHTML = data.ans ;
+        }
+      
+
+</script>
+</html>
