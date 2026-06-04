@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO-APP</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+</head>
+<body>
+    <div style="display: flex ; justify-content: space-between ; padding: 0px 120px;">
+
+         <div id="data">
+           Loding.......
+         </div>
+             
+        <div>
+         <input type="text" id="txt">
+         <button onclick="addTodo()">create</button>
+       </div>
+    
+    </div>
+    
+</body>
+  
+<script>
+        
+        let notes =[];
+
+        async function getTodo() {
+                 let res = await axios.get("http://localhost:3000/notes" ,{
+                    headers:{
+                        token:localStorage.getItem("token")
+                    }
+                 });
+                  let notes = res.data.notes;
+                 printData();
+
+              }
+         
+         getTodo();
+
+        async function addTodo(){
+               await axios.post("http://localhost:3000/notes" , {
+                    note : document.getElementById("txt").value
+                });
+                document.getElementById("txt").value="";
+                getTodo();
+         }        
+              
+              let printData = ()=>{
+                   document.getElementById("data").innerHTML="";
+                   for(let i=0 ; i< notes.length ; i++){
+                       const noteNote = document.createElement("div");
+                       noteNote.innerHTML=notes[i];
+                       document.getElementById("data").appendChild(noteNote);
+                   }
+              }
+</script>
+
+</html>
