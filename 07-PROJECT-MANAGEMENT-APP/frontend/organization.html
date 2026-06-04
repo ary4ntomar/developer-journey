@@ -1,0 +1,176 @@
+
+<script>
+    if(!localStorage.getItem("token")){
+       window.location.href="./signin.html"
+        alert("login faild");
+    }
+
+</script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+     <div>
+         <a href="./dashboard.html">Home</a>  <br> <br>
+          NEXT : <a href="./boards.html" id="next">Boards of org</a>
+         <h1>Organizations details </h1>
+         <div id="organization"></div>
+
+     </div>
+     <hr>
+
+     <div>
+        <h2>Add members to the organization</h2>
+        <input type="text"  id="username"  placeholder=" enter the user name">
+        <button id="button">Add</button>
+     </div>
+</body>
+
+<script>
+
+
+
+      // get current page URL query
+    const params =  new URLSearchParams(window.location.search);
+     
+      //extract orgID value
+      const orgID = params.get("orgId");
+      
+      //check result
+      console.log(orgID);
+
+      const orgDetails = document.getElementById("organization");
+      
+      const fetchOrg =  async () =>{
+
+        const URL = `http://localhost:3000/organization?organizationId=${orgID}`;
+        const token = localStorage.getItem("token");
+
+        try{
+            const res = await axios.get(URL,
+            {
+                headers:{
+                    token : token
+                }
+            });
+
+            const  org = res.data.Organization;
+
+             const membersHTML = org.members.map( mem =>
+               
+              ` 
+              <div>
+                
+                  <p>${mem.username}</p> 
+
+                <button 
+                   class="deleteBtn"
+                   data-username="${mem.username}">
+                   Delete
+                </button>
+
+               </div>
+               
+               `).join("");
+            
+            
+
+                  orgDetails.innerHTML = ` 
+                   <h2>${org.title}</h2>
+                   
+                   <p>${org.description}</p>
+                   
+                  <h3>Members</h3>
+
+                    ${membersHTML}
+             
+             `
+
+             
+           const deleteBtns = document.querySelectorAll(".deleteBtn");
+            deleteBtns.forEach(button =>{
+                 
+              button.addEventListener("click",async ()=>{
+                     const username = button.dataset.username ;
+
+                     const URL =`http://localhost:3000/members`;
+                     const token = localStorage.getItem("token");
+
+                     try{
+                        const res = await axios.delete(URL,{
+                            headers:{
+                                token : token
+                            },
+
+                             data:{
+                            organizationId:orgID,
+                            memberUsername:username
+                            }
+                        })
+
+                        fetchOrg()
+                     }
+
+                     catch(e){
+                        console.log(e)
+                     }
+         })
+            })           
+
+
+        }
+         catch(e){
+            console.log(e);
+        }
+      }
+
+      fetchOrg();
+
+
+      //add member
+
+      const username = document.getElementById("username");
+      const button = document.getElementById("button");
+
+       button.addEventListener("click", async ()=>{
+           
+          const URL =`http://localhost:3000/add-member-to-organization`;
+          const token = localStorage.getItem("token");
+
+          try{
+            const res = await axios.post(URL,{
+
+                organizationId : orgID ,
+                memberUsername : username.value
+            },{
+                headers:{
+                    token : token
+                }
+            })
+
+             fetchOrg();
+             username.value = "";
+          }
+          
+       catch(e){
+         console.log(e)
+      }
+      
+    });
+
+   
+    //boards
+    const next= document.getElementById("next");
+    next.href = `./boards.html?orgId=${orgID}`
+          
+
+</script>
+</html>
+ 

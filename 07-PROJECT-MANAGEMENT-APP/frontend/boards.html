@@ -1,0 +1,106 @@
+
+<script>
+    if(!localStorage.getItem("token")){
+       window.location.href="./signin.html"
+        alert("login faild");
+    }
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BOARDS</title>
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <a href="./dashboard.html">Home</a>
+    <h1>M Y - B O A R D S </h1>
+
+    <div>
+       Enter board title :  <input type="text"  id="title" placeholder="enter title here">
+       <button id="btn">Submit</button>
+    </div>   
+     <hr>
+       <div id="myboard"></div>
+  
+</body>
+
+<script>
+     //fetch org id
+     const params =  new URLSearchParams(window.location.search);
+      const orgID = params.get("orgId");
+    
+    const title = document.getElementById("title");
+    const btn = document.getElementById("btn");
+
+    btn.addEventListener("click", async ()=>{
+        const URL = `http://localhost:3000/boards`
+        const token = localStorage.getItem("token");
+
+        try{
+            const res = await axios.post(URL,
+            {
+                title : title.value,
+                organizationId : orgID
+            },
+            {
+            headers :{
+                token : token
+            }
+           }
+        )
+                 title.value = "";
+                 fetchBoard();
+    }
+        catch(e){
+            console.log(e);
+        }
+})   
+
+  //get
+
+  const myboard = document.getElementById("myboard");
+   
+  const fetchBoard = async ()=>{
+         const URL = `http://localhost:3000/boards?organizationId=${orgID}`;
+         const token = localStorage.getItem("token");
+
+         try{
+            const res = await axios.get(URL,{
+                headers:{
+                    token : token
+                }
+            })
+              const  boards = res.data.boards;
+
+             const boardHTML = boards.map( board =>
+               
+              ` 
+              <div>
+                
+                  <h3>${board.title}</h3> 
+
+                 <a href = "./issues.html?boardId=${board._id}">
+                    open issues
+                </a>
+
+               </div>
+               
+               `).join("");
+
+               myboard.innerHTML = boardHTML ;
+
+
+         } 
+                   
+         catch(e){
+            console.log(e);
+         }
+  }     
+   title.value = "";
+   fetchBoard();
+
+</script>
+</html>

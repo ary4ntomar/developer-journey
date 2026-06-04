@@ -1,0 +1,62 @@
+
+<script>
+    if(!localStorage.getItem("token")){
+       window.location.href="./signin.html"
+        alert("login faild");
+    }
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Organizations</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<b>
+     <a href="./dashboard.html">Home</a>
+    <h1>M Y - O R G A N I Z A T I O N</h1>
+    <div id="myorgs"></div>
+</body>
+<script>
+     const organizations = document.getElementById("myorgs");
+     
+     const orglist = async () => {
+         let url ="http://localhost:3000/my-organizations";
+          const token = localStorage.getItem("token")
+        
+        try{
+             const res = await axios.get(url,{
+                headers:{
+                 token: token
+                }
+             })
+            console.log(res.data)
+            const myOrgs = res.data.myOrgs;
+
+            
+
+            const orgHTML = myOrgs.map(org => `
+           <div>
+           <h3>${org.title}</h3>
+
+          <a href="./organization.html?orgId=${org._id}">
+          Open Organization
+           </a>
+         <hr>
+         </div>
+         `).join("");
+
+          organizations.innerHTML = orgHTML;
+        }
+        catch(e){
+            console.log(e);
+        }
+     }
+     orglist()
+
+
+</script>
+</html>

@@ -1,0 +1,71 @@
+
+<script>
+    if(!localStorage.getItem("token")){
+       window.location.href="./signin.html"
+        alert("login faild");
+    }
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onboarding</title>
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+      <a href="./dashboard.html">Home</a>
+      <h1>  - - - - - O N B O A R D I N G  - - - - -  </h1>
+      <div>
+          <div>Create your first organization</div>
+          <br>
+           Title :
+          <input id="title" type="text" placeholder="Enter the title of org">
+          <br><br>
+           Description  :
+          <input id="description" type="text" placeholder="Enter the description">
+          <br><br>
+           <button id="btn">Create organization</button>
+     </div>
+</body>
+
+<script>
+        
+        const button = document.getElementById("btn");
+        
+        button.addEventListener("click", async () => {
+             
+            const title = document.getElementById("title").value ;
+            const description = document.getElementById("description").value ;
+
+            let url = "http://localhost:3000/organization";
+             const token = localStorage.getItem("token")
+
+            try{
+                const res = await axios.post(url,
+                {
+                    title,
+                    description
+                }, 
+                {
+                    headers:{
+                    token : token
+                  }
+              })
+                
+                console.log(res.data);
+                alert("Organization created Successfully")
+
+                window.location.href ="./myorg.html"
+            }
+
+            catch(e){
+                 console.log(e);
+                alert("Error occured")
+            }
+        })
+     
+</script>
+</html>

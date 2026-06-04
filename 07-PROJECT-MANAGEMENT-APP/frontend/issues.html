@@ -1,0 +1,217 @@
+<script>
+    if(!localStorage.getItem("token")){
+       window.location.href="./signin.html"
+        alert("login faild");
+    }
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issues</title>
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <a href="./dashboard.html">Home</a>
+    <div> 
+          <h1>CREATE ISSUES :-</h1>
+     <br>
+     Enter issue's title : <input type="text" id="issue" placeholder="enter the title">
+     <br> <br>
+     Enter Assigned person's name : <input type="text" id="assignedTo" placeholder="enter name here">
+     <br> <br> 
+     <button id="issueBtn">Submit</button>
+      <br> 
+    </div>
+
+     <div>
+        <h1>YOUR ISSUES :-</h1>
+         
+         <hr>
+
+        <div id="yourIssue">
+                      
+                <h2>UPNEXT</h2>
+           <div id="upnextIssues"></div>
+             
+            <hr>
+
+            <h2>INPROGRESS</h2>
+          <div id="progressIssues"></div>
+
+           <hr>
+
+           <h2>DONE</h2>
+         <div id="doneIssues"></div>
+
+         <hr>
+
+        </div>
+
+     </div>
+    
+</body>
+</html>
+
+<script>
+      
+      const params = new URLSearchParams(window.location.search);
+      const boardId = params.get("boardId");
+
+     const issue = document.getElementById("issue");
+     const issueBtn = document.getElementById("issueBtn");
+     const assignedTo = document.getElementById("assignedTo")
+
+     issueBtn.addEventListener("click", async ()=>{
+        const URL =`http://localhost:3000/issue`;
+        const token = localStorage.getItem("token");
+
+        try{
+            const res = await axios.post(URL,{
+              title : issue.value,
+              boardId : boardId,
+             assignedTo : assignedTo.value
+            },{
+                headers:{
+                    token:token
+                }
+            }
+        )
+
+         issue.value = "";
+         assignedTo.value = "";
+         fetchIssues();
+
+        }  
+        catch(e){
+        console.log(e)
+     }
+     } 
+    )
+
+
+    //get issue
+    
+    const yourIssue = document.getElementById("yourIssue");
+    const upnextIssues = document.getElementById("upnextIssues");
+    const progressIssues = document.getElementById("progressIssues");
+    const doneIssues = document.getElementById("doneIssues");
+ 
+const fetchIssues = async () => {
+         const URL = `http://localhost:3000/issues?boardId=${boardId}`;
+          const token = localStorage.getItem("token");
+          
+         try {
+              const res = await axios.get(URL,{
+              headers:{
+                    token:token
+             } })
+
+             const myissue = res.data.issues;
+
+             const upnext = myissue.filter(issue => issue.status === "upnext");
+
+             const inprogress = myissue.filter(issue => issue.status === "inprogress");
+
+             const done = myissue.filter(issue => issue.status === "done");
+
+             const upnextHTML = upnext.map(issue => `
+                
+                <div>
+                   <h3> ${issue.title} </h3>
+
+                   <p>Status: ${issue.status}</p>
+
+                   <a href="./issuesmember.html?issueId=${issue._id}">
+                  View Assigned Member
+                 </a>
+
+                   <button
+                    class="updateBtn"
+                    data-id="${issue._id}">
+                    update status
+                   </button>
+                   <hr>
+                   </div>
+             `).join("");
+
+                 upnextIssues.innerHTML = upnextHTML;
+            
+
+               const inprogressHTML = inprogress.map(issue => `
+                
+                <div>
+                   <h3> ${issue.title} </h3>
+
+                   <p>Status: ${issue.status}</p>
+
+                   <a href="./issuesmember.html?issueId=${issue._id}">
+                 View Assigned Member
+                  </a>
+
+                   <button
+                    class="updateBtn"
+                    data-id="${issue._id}">
+                    update status
+                   </button>
+                   <hr>
+                   </div>
+             `).join("");
+
+                 progressIssues.innerHTML = inprogressHTML;
+          
+              const doneHTML = done.map(issue => `
+                
+                <div>
+                   <h3> ${issue.title} </h3>
+
+                   <p>Status: ${issue.status}</p>
+
+                   <a href="./issuesmember.html?issueId=${issue._id}"> 
+                  View Assigned Member
+                 </a>
+                   <hr>
+                   </div>
+             `).join("");
+
+                 doneIssues.innerHTML = doneHTML;
+
+                 const updatebtns = document.querySelectorAll(".updateBtn");
+
+                 updatebtns.forEach(button => {
+                    button.addEventListener("click",async ()=>{
+                        const issueId = button.dataset.id;
+                        const URL =`http://localhost:3000/issues?issueId=${issueId}`;
+                        const token = localStorage.getItem("token");
+
+                        try{
+                            await axios.put(URL,{},{
+                                headers:{
+                                    token:token
+                                }
+                            })
+
+                            fetchIssues();
+                        }
+
+                        catch(e){
+                            console.log(e);
+                        }
+                    });
+                 });
+
+         }
+
+         catch (e) {
+            console.log(e)
+          }
+
+    }
+
+       fetchIssues();
+
+
+</script>

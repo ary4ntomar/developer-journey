@@ -1,0 +1,56 @@
+<script>
+    if(!localStorage.getItem("token")){
+       window.location.href="./signin.html"
+        alert("login faild");
+    }
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Issue members</title>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <a href="./dashboard.html">Home</a>
+    <h1>Members:-</h1>
+    <div id="mems"></div>
+</body>
+</html>
+<script>
+    const params = new URLSearchParams(window.location.search);
+    const issueId = params.get("issueId");
+
+    const members = document.getElementById("mems");
+
+    const fetchMembers = async () => {
+        const URL =`http://localhost:3000/members?issueId=${issueId}`;
+        const token = localStorage.getItem("token");
+
+        try{
+            const res = await axios.get(URL,{
+                headers:{
+                    token:token
+                }
+            })
+
+            const mems = res.data.members;
+            const membersHTML = mems.map(member =>
+                ` <div>
+                    <h3>${member.username}</h3>
+                    </div>
+            `).join("");
+
+            members.innerHTML=membersHTML;
+        }
+
+        catch(e){
+            console.log(e);
+        }
+    }
+
+    fetchMembers();
+</script>
